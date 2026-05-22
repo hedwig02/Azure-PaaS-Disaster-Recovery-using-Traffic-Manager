@@ -1,140 +1,115 @@
-# Azure-PaaS-Disaster-Recovery-using-Traffic-Manager
-# Azure PaaS Disaster Recovery Project using Traffic Manager
+# Azure PaaS & IaaS Disaster Recovery Project
 
-## Project Overview
+## 📌 Project Overview
 
-This project demonstrates a Platform as a Service (PaaS) Disaster Recovery solution on Microsoft Azure using:
+This project demonstrates the implementation of Disaster Recovery (DR) and High Availability architectures in Microsoft Azure using both Platform as a Service (PaaS) and Infrastructure as a Service (IaaS) components.
+
+The project includes:
+
+- Azure App Services
+- Azure Traffic Manager
+- Azure Virtual Machines
+- Azure Load Balancer
+- Azure Application Gateway
+- IIS Web Server
+- High Availability & Disaster Recovery concepts
+
+---
+
+# ☁️ Module 1 – PaaS Disaster Recovery
+
+## 🔹 Objective
+
+Implement Disaster Recovery for Azure App Services using Azure Traffic Manager with priority-based routing.
+
+---
+
+## 🛠️ Services Used
 
 - Azure App Service
 - Azure App Service Plan
 - Azure Traffic Manager
-- Multi-region deployment
-- Priority-based failover routing
-
-The goal of this project is to ensure high availability and automatic failover during regional outages.
+- Azure Resource Groups
 
 ---
 
-# Architecture
+## 🏗️ Architecture
 
-Primary Region:
-- Canada Central
-- App Service: app-primary-sejal
+Users → Traffic Manager → Primary App Service / DR App Service
 
-Disaster Recovery Region:
-- Central US
-- App Service: app-dr-sejal
+---
 
-Traffic Distribution:
-- Azure Traffic Manager
+## ✅ Tasks Performed
+
+### 1. Created Resource Groups
+- rg-paas-primary-sejal
+- rg-paas-dr-sejal
+
+### 2. Created App Services
+- app-primary-sejal
+- app-dr-sejal
+
+### 3. Configured Traffic Manager
 - Routing Method: Priority
+- Added Primary Endpoint
+- Added DR Endpoint
+
+### 4. Verified Endpoint Health
+- Both endpoints configured and monitored successfully
 
 ---
 
-# Services Used
+# ☁️ Module 2 – IaaS Disaster Recovery
 
-| Service | Purpose |
-|---|---|
-| Azure App Service | Host web applications |
-| App Service Plan | Compute resources for App Services |
-| Azure Traffic Manager | Global DNS-based traffic routing |
-| Resource Groups | Resource organization |
-| Azure Portal | Resource deployment and management |
+## 🔹 Objective
+
+Implement High Availability architecture using Azure Virtual Machines, Load Balancer, and Application Gateway.
 
 ---
 
-# Project Workflow
+## 🛠️ Services Used
 
-1. Created two Resource Groups in different Azure regions
-2. Created two App Service Plans
-3. Deployed two Web Apps
-4. Configured Azure Traffic Manager
-5. Added endpoints for both applications
-6. Configured Priority routing method
-7. Tested endpoint health monitoring
-8. Simulated disaster recovery and failover
+- Azure Virtual Machines
+- Azure Virtual Network
+- Azure Load Balancer
+- Azure Application Gateway
+- IIS Web Server
+- Azure Bastion
 
 ---
 
-# Traffic Manager Configuration
+# 🏗️ Architecture
 
-| Setting | Value |
-|---|---|
-| Routing Method | Priority |
-| Primary Endpoint Priority | 1 |
-| DR Endpoint Priority | 2 |
-| Monitoring Protocol | HTTP |
-| Monitoring Port | 80 |
-| Monitoring Path | / |
-
----
-
-# Disaster Recovery Scenario
-
-If the primary region becomes unavailable:
-
-- Traffic Manager automatically redirects users
-- Traffic is routed to the DR region
-- Application remains accessible
-- Downtime is minimized
+Users  
+↓  
+Application Gateway  
+↓  
+Azure Load Balancer  
+↓  
+VM-Web1 + VM-Web2 (IIS)
 
 ---
 
-# Business Use Case
+# ✅ Tasks Performed
 
-A global company hosting customer-facing applications requires:
-
-- High availability
-- Business continuity
-- Automatic failover
-- Reduced downtime
-- Better user experience
-
-This solution helps organizations continue serving users even during regional outages.
+## 1. Created Resource Groups
+- rg-iaas-prod-sejal
+- rg-iaas-dr-sejal
 
 ---
 
-# Key Learning Outcomes
-
-- Azure App Service deployment
-- Multi-region architecture
-- Traffic Manager configuration
-- Disaster Recovery concepts
-- Priority routing implementation
-- High availability design
-- PaaS-based failover solution
+## 2. Created Virtual Networks
+- vnet-prod-sejal
+- vnet-dr-sejal
 
 ---
 
-# Screenshots
+## 3. Deployed Windows Virtual Machines
+- vm-web1
+- vm-web2
 
-## Primary App Service
-(Add screenshot here)
-
-## DR App Service
-(Add screenshot here)
-
-## Traffic Manager Endpoints
-(Add screenshot here)
-
-## Endpoint Health Status
-(Add screenshot here)
+Both VMs were deployed in Canada Central region.
 
 ---
 
-# Future Improvements
-
-- Implement custom domain
-- Configure HTTPS certificates
-- Add Azure Front Door
-- Integrate monitoring with Azure Monitor
-- Automate deployment using Terraform
-
----
-
-# Author
-
-Sejal Sakhala
-
-GitHub:
-https://github.com/hedwig02
+## 4. Installed IIS Web Server
